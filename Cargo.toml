@@ -1,0 +1,51 @@
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+authors = ["Marcin Sas-Szymański <synek317@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/synek317/nimh"
+
+[workspace.dependencies]
+nimh_types = { version = "0.1.0", path = "crates/types", default-features = false }
+serde = "1.0.229"
+serde_json = "1.0.154"
+test-case = "3.4.0"
+
+[workspace.lints.rust]
+missing_docs = "warn"
+unsafe_code = "forbid"
+
+[workspace.lints.rustdoc]
+broken_intra_doc_links = "deny"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+
+[package]
+name = "nimh"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Convenience-first building blocks for everyday Rust development"
+documentation = "https://docs.rs/nimh"
+readme = "README.md"
+keywords = ["application", "helpers", "utilities"]
+categories = ["development-tools"]
+
+[lints]
+workspace = true
+
+[features]
+default = ["serde"]
+serde = ["nimh_types/serde"]
+
+[dependencies]
+nimh_types = { workspace = true }

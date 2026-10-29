@@ -1,0 +1,28 @@
+[package]
+name = "nimh_types"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reusable types with validated invariants for Rust applications."
+documentation = "https://docs.rs/nimh_types"
+readme = "README.md"
+keywords = ["newtype", "non-empty", "string", "validation", "serde"]
+categories = ["data-structures", "rust-patterns"]
+
+[lints]
+workspace = true
+
+[features]
+default = ["serde"]
+serde = ["dep:serde"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+
+[dev-dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+test-case.workspace = true
