@@ -1,0 +1,16 @@
+[package]
+name = "nimh_fs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "File system utils for NiMh crate"
+documentation = "https://docs.rs/nimh_fs"
+readme = "README.md"
+keywords = ["filesystem"]
+categories = []
+
+[dev-dependencies]
+test-case.workspace = true
