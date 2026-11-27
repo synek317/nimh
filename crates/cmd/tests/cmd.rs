@@ -1,6 +1,6 @@
-#![cfg(unix)]
-
 //! Integration tests that run real commands.
+
+#![cfg(unix)]
 
 use std::fs;
 

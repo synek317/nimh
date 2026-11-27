@@ -122,36 +122,36 @@ mod tests {
     }
 
     #[test_case(
-        EnvError::InvalidName { name: String::from("PO=RT") },
+        &EnvError::InvalidName { name: String::from("PO=RT") },
         r#"invalid environment variable name "PO=RT": a name must not be empty or contain `=` or NUL"#;
         "invalid name"
     )]
     #[test_case(
-        EnvError::NotSet { name: name() },
+        &EnvError::NotSet { name: name() },
         "environment variable `PORT` is not set";
         "not set"
     )]
     #[test_case(
-        EnvError::NotUnicode { name: name(), value: OsString::from("80") },
+        &EnvError::NotUnicode { name: name(), value: OsString::from("80") },
         r#"environment variable `PORT` is not valid Unicode: "80""#;
         "not Unicode"
     )]
     #[test_case(
-        invalid_value("http"),
+        &invalid_value("http"),
         r#"environment variable `PORT` has invalid value "http": invalid digit found in string"#;
         "invalid value"
     )]
     #[test_case(
-        invalid_value("80\n"),
+        &invalid_value("80\n"),
         r#"environment variable `PORT` has invalid value "80\n": invalid digit found in string"#;
         "invisible characters are escaped"
     )]
     #[test_case(
-        invalid_value(""),
+        &invalid_value(""),
         r#"environment variable `PORT` has invalid value "": cannot parse integer from empty string"#;
         "empty value"
     )]
-    fn message_names_the_variable_and_the_problem(error: EnvError, expected: &str) {
+    fn message_names_the_variable_and_the_problem(error: &EnvError, expected: &str) {
         assert_eq!(error.to_string(), expected);
         assert!(error.to_string().contains(error.name()));
     }

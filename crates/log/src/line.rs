@@ -56,14 +56,15 @@ mod tests {
         Timestamp::from_duration_since_epoch(Duration::from_millis(1_794_400_863_123));
 
     fn line(level: Level, colors: Colors) -> String {
-        let record = Record::builder()
-            .level(level)
-            .target("my_app::server")
-            .args(format_args!("listening on port {}", 8080))
-            .build();
+        // The record borrows its arguments, so it has to be used in the statement that
+        // creates it.
         Line {
             timestamp: TIMESTAMP,
-            record: &record,
+            record: &Record::builder()
+                .level(level)
+                .target("my_app::server")
+                .args(format_args!("listening on port {}", 8080))
+                .build(),
             colors,
         }
         .to_string()

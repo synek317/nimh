@@ -239,6 +239,10 @@ mod tests {
     const PORT: EnvVar = EnvVar::new("PORT");
     const UNSET: EnvVar = EnvVar::new("NIMH_ENV_TESTS_UNSET");
 
+    #[expect(
+        clippy::unnecessary_wraps,
+        reason = "stands for a successful lookup, which is a `Result`"
+    )]
     fn set(value: &str) -> Result<String, VarError> {
         Ok(value.to_owned())
     }
