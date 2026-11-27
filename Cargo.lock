@@ -127,6 +127,7 @@ name = "nimh_fs"
 version = "0.1.0"
 dependencies = [
  "fs-err",
+ "log",
  "path-clean",
  "pathdiff",
  "tempfile",

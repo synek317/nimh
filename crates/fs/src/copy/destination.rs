@@ -170,28 +170,24 @@ fn comparable_path(path: &Path, kind: EntryKind) -> CopyResult<PathBuf> {
     if kind == EntryKind::Symlink {
         return absolute(path);
     }
-    std::fs::canonicalize(path).map_err(|source| CopyError::Inspect {
-        path: path.to_owned(),
-        source,
-    })
+    entry::canonicalize(path)
 }
 
 fn comparable_destination(path: &Path) -> CopyResult<PathBuf> {
     match entry::inspect(path)? {
         Some(EntryKind::Symlink) | None => canonical_parent_path(path),
-        Some(_) => std::fs::canonicalize(path).map_err(|source| CopyError::Inspect {
-            path: path.to_owned(),
-            source,
-        }),
+        Some(_) => entry::canonicalize(path),
     }
 }
 
 fn canonical_parent_path(path: &Path) -> CopyResult<PathBuf> {
-    let parent = path.parent().unwrap_or_else(|| Path::new("."));
-    let parent = std::fs::canonicalize(parent).map_err(|source| CopyError::Inspect {
-        path: parent.to_owned(),
-        source,
-    })?;
+    // A bare file name such as `copy` has an empty parent, which stands for the current
+    // directory but cannot be canonicalized as such.
+    let parent = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    let parent = entry::canonicalize(parent)?;
     let Some(name) = path.file_name() else {
         return absolute(path);
     };

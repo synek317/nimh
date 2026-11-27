@@ -1,6 +1,6 @@
-#![cfg(unix)]
-
 //! Tests for source symbolic-link behavior.
+
+#![cfg(unix)]
 
 mod support;
 
@@ -8,7 +8,7 @@ use std::fs;
 use std::os::unix::fs::symlink;
 use std::path::Path;
 
-use nimh_fs::{CopyOptions, EntryKind, SymlinkBehavior, copy_recursively, cp_r, cp_rl};
+use nimh_fs::{CopyOptions, EntryKind, SymlinkBehavior, cp_r, cp_rl};
 use support::{TestResult, entry_kind};
 use tempfile::tempdir;
 use test_case::test_case;
@@ -49,7 +49,7 @@ fn relocation_redirects_internal_links_to_copied_targets() -> TestResult {
     symlink(source.join("bar"), source.join("absolute"))?;
     symlink(source.join("missing"), source.join("broken"))?;
 
-    copy_recursively(&source, &destination, SymlinkBehavior::Relocate)?;
+    CopyOptions::cp_r(SymlinkBehavior::Relocate).copy(&source, &destination)?;
 
     assert_eq!(
         fs::read_link(destination.join("relative"))?,
@@ -76,7 +76,7 @@ fn relocation_keeps_external_target() -> TestResult {
     fs::write(temp.path().join("shared"), "content")?;
     symlink("../shared", source.join("link"))?;
 
-    copy_recursively(&source, &destination, SymlinkBehavior::Relocate)?;
+    CopyOptions::cp_r(SymlinkBehavior::Relocate).copy(&source, &destination)?;
 
     assert_eq!(
         fs::read_link(destination.join("link"))?,

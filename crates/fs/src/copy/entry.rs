@@ -1,7 +1,9 @@
 use std::io;
 use std::path::{Path, PathBuf};
 
-use fs_err as fs;
+use std::fs;
+
+use crate::symlink;
 
 use super::{CopyError, CopyResult, EntryKind};
 
@@ -28,7 +30,8 @@ pub(super) fn followed_kind(path: &Path) -> CopyResult<EntryKind> {
 pub(super) fn remove(path: &Path, kind: EntryKind) -> CopyResult<()> {
     let result = match kind {
         EntryKind::Directory => fs::remove_dir_all(path),
-        EntryKind::File | EntryKind::Symlink | EntryKind::Other => fs::remove_file(path),
+        EntryKind::Symlink => symlink::remove(path),
+        EntryKind::File | EntryKind::Other => fs::remove_file(path),
     };
     result.map_err(|source| CopyError::Remove {
         path: path.to_owned(),

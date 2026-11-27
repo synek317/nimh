@@ -36,7 +36,7 @@ fn destination_error_contains_path_and_kind() -> TestResult {
 }
 
 #[test]
-fn io_error_keeps_its_source() -> TestResult {
+fn missing_source_is_named() -> TestResult {
     let temp = tempdir()?;
     let missing = temp.path().join("missing");
 
@@ -44,11 +44,30 @@ fn io_error_keeps_its_source() -> TestResult {
         .copy(&missing, temp.path().join("destination"))
         .unwrap_err();
 
-    let source = error.source().expect("I/O cause should be retained");
-    let io_error = source
+    assert!(matches!(error, CopyError::SourceNotFound { .. }), "{error}");
+    assert_eq!(
+        error.to_string(),
+        format!("source '{}' does not exist", missing.display())
+    );
+    Ok(())
+}
+
+#[test]
+fn io_error_is_kept_as_the_source_and_not_repeated() -> TestResult {
+    let temp = tempdir()?;
+    let source = temp.path().join("source");
+    let destination = temp.path().join("no/such/directory/file");
+    fs::write(&source, "content")?;
+
+    let error = CopyOptions::new().copy(&source, &destination).unwrap_err();
+
+    let cause = error.source().expect("I/O cause should be retained");
+    let io_error = cause
         .downcast_ref::<io::Error>()
         .expect("cause should be an io::Error");
     assert_eq!(io_error.kind(), io::ErrorKind::NotFound);
+    assert!(cause.source().is_none(), "{cause:?}");
+    assert!(!cause.to_string().contains("source"), "{cause}");
     Ok(())
 }
 

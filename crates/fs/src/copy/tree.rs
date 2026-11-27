@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
-use fs_err as fs;
+use std::fs;
 
 use super::entry;
 use super::operations;
@@ -282,8 +282,7 @@ fn type_mismatch(
 }
 
 fn missing_source(path: &Path) -> CopyError {
-    CopyError::Inspect {
+    CopyError::SourceNotFound {
         path: path.to_owned(),
-        source: std::io::Error::new(std::io::ErrorKind::NotFound, "source does not exist"),
     }
 }

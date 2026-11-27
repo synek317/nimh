@@ -1,6 +1,6 @@
 use std::path::Path;
 
-use fs_err as fs;
+use std::fs;
 
 use super::{CopyError, CopyResult};
 

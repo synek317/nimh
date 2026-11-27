@@ -1,6 +1,6 @@
-#![cfg(unix)]
-
 //! Tests for policies applied to the destination passed by the caller.
+
+#![cfg(unix)]
 
 mod support;
 

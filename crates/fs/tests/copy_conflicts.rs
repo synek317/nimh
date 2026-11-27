@@ -1,6 +1,6 @@
-#![cfg(unix)]
-
 //! Tests for collisions below the destination root.
+
+#![cfg(unix)]
 
 mod support;
 

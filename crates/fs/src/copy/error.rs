@@ -7,7 +7,15 @@ use super::EntryKind;
 
 /// An error produced while recursively copying a file-system entry.
 #[derive(Debug, Error)]
+#[non_exhaustive]
 pub enum CopyError {
+    /// The source does not exist.
+    #[error("source '{}' does not exist", path.display())]
+    SourceNotFound {
+        /// The missing source path.
+        path: PathBuf,
+    },
+
     /// A path could not be inspected.
     #[error("cannot inspect '{}'", path.display())]
     Inspect {
