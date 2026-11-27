@@ -1,6 +1,6 @@
 //! Types for [NiMh](https://github.com/synek317/nimh), also available through `nimh::types`.
 //!
-//! NiMh: [crates.io](https://crates.io/crates/nimh) / [docs.rs](https://docs.rs/nimh) / [github](https://github.com/synek317/nimh).
+//! `NiMh`: [crates.io](https://crates.io/crates/nimh) / [docs.rs](https://docs.rs/nimh) / [github](https://github.com/synek317/nimh).
 
 pub use non_empty_box_str::NonEmptyBoxStr;
 pub use non_empty_str::NonEmptyStr;

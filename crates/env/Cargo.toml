@@ -1,0 +1,22 @@
+[package]
+name = "nimh_env"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Typed environment variables for NiMh crate"
+documentation = "https://docs.rs/nimh_env"
+readme = "README.md"
+keywords = ["environment", "env", "config", "parse", "utilities"]
+categories = ["config"]
+
+[lints]
+workspace = true
+
+[dependencies]
+log.workspace = true
+
+[dev-dependencies]
+test-case.workspace = true

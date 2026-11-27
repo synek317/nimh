@@ -11,10 +11,21 @@ license = "MIT"
 repository = "https://github.com/synek317/nimh"
 
 [workspace.dependencies]
+fs-err = "3.3.2"
+log = "0.4.35"
+nimh_cmd = { version = "0.1.0", path = "crates/cmd", default-features = false }
+nimh_env = { version = "0.1.0", path = "crates/env", default-features = false }
+nimh_error = { version = "0.1.0", path = "crates/error", default-features = false }
+nimh_fs = { version = "0.1.0", path = "crates/fs", default-features = false }
+nimh_log = { version = "0.1.0", path = "crates/log", default-features = false }
 nimh_types = { version = "0.1.0", path = "crates/types", default-features = false }
+path-clean = "1.0.1"
+pathdiff = "0.2.3"
 serde = "1.0.229"
 serde_json = "1.0.154"
 test-case = "3.4.0"
+tempfile = "3.27.0"
+thiserror = "2.0.21"
 
 [workspace.lints.rust]
 missing_docs = "warn"
@@ -48,4 +59,9 @@ default = ["serde"]
 serde = ["nimh_types/serde"]
 
 [dependencies]
+nimh_cmd = { workspace = true }
+nimh_env = { workspace = true }
+nimh_error = { workspace = true }
+nimh_fs = { workspace = true }
+nimh_log = { workspace = true }
 nimh_types = { workspace = true }

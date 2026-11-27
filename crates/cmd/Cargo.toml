@@ -1,0 +1,23 @@
+[package]
+name = "nimh_cmd"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Running external commands for NiMh crate"
+documentation = "https://docs.rs/nimh_cmd"
+readme = "README.md"
+keywords = ["command", "process", "subprocess", "shell", "utilities"]
+categories = ["os"]
+
+[lints]
+workspace = true
+
+[dependencies]
+log.workspace = true
+
+[dev-dependencies]
+test-case.workspace = true
+tempfile.workspace = true

@@ -1,0 +1,19 @@
+[package]
+name = "nimh_error"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Readable error reports for NiMh crate"
+documentation = "https://docs.rs/nimh_error"
+readme = "README.md"
+keywords = ["error", "report", "chain", "main", "utilities"]
+categories = ["rust-patterns"]
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+test-case.workspace = true

@@ -1,0 +1,23 @@
+[package]
+name = "nimh_log"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Readable logs in one line of setup for NiMh crate"
+documentation = "https://docs.rs/nimh_log"
+readme = "README.md"
+keywords = ["log", "logger", "logging", "stderr", "utilities"]
+categories = ["development-tools::debugging"]
+
+[lints]
+workspace = true
+
+[dependencies]
+log = { workspace = true, features = ["std"] }
+nimh_env.workspace = true
+
+[dev-dependencies]
+test-case.workspace = true

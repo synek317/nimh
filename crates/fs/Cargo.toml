@@ -9,8 +9,18 @@ repository.workspace = true
 description = "File system utils for NiMh crate"
 documentation = "https://docs.rs/nimh_fs"
 readme = "README.md"
-keywords = ["filesystem"]
-categories = []
+keywords = ["filesystem", "copy", "symlink", "utilities"]
+categories = ["filesystem"]
+
+[lints]
+workspace = true
+
+[dependencies]
+fs-err.workspace = true
+path-clean.workspace = true
+pathdiff.workspace = true
+thiserror.workspace = true
 
 [dev-dependencies]
 test-case.workspace = true
+tempfile.workspace = true
